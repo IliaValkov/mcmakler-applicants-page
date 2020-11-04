@@ -1,3 +1,94 @@
 *, *::before, *::after {
     box-sizing: border-box;
 }
+
+/* General styles */
+html {
+    scroll-behavior: smooth;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: #E5E5E5;
+    line-height: 24px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+@media (min-width:800px) {
+    body{
+        height: 100vh;
+        padding: 0 50px;
+    }
+
+    main {
+        flex-grow: 1;
+    }
+}
+
+/* Added fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,400&display=swap');
+
+/* Hedaer */
+header span.shownInMobile{
+    display: flex;
+}
+
+header {
+    padding: 24px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+header span{
+    display: none;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+
+header span:not(:first-child){
+    margin-left: 2em;
+}
+
+header .support{
+    flex-grow: 1;
+}
+
+header span p {
+    display: inline;
+    margin: 0;
+    margin-left: 10px;
+}
+
+@media (min-width: 800px) {
+    header {
+        padding: 24px 0;
+    }
+    header span {
+        display: flex;
+    }
+}
+
+/*  Footer */
+footer {
+    text-align: center;
+    padding: 24px 0;
+}
+
+footer a {
+    text-decoration: none;
+    pointer-events: none;
+    color: inherit;
+    opacity: 0.54;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+/* Main */
+main {
+    background-color: #FFFFFF;
+}
