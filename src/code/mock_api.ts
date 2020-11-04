@@ -48,7 +48,7 @@ export const getApplicants: () => { applicants: IApplicant[]} = () => {
             status: {
                 statusType: StatusType.Property_Viewed,
                 date: "11 June 19:00",
-                bid: "250.000 \u20AC",
+                bid: "250.000",
                 }       
             },{
             firstName: "Gottschalk",
@@ -58,7 +58,7 @@ export const getApplicants: () => { applicants: IApplicant[]} = () => {
             status: {
                 statusType: StatusType.Property_Viewed,
                 date: "11 June 19:00",
-                bid: "250.000 \u20AC",
+                bid: "250.000",
                 }       
             }
         ]
