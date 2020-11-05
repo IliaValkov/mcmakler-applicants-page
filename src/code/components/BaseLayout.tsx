@@ -7,6 +7,7 @@ import { PageInformation } from "./PageInformation";
 import { SearchBox } from "./SearchBox";
 import { Filter } from "./Filter";
 import { ApplicantList } from "./ApplicantList";
+import { Overlay } from "./Overlay";
 
 
 export default class BaseLayout extends React.Component {
@@ -38,18 +39,7 @@ export default class BaseLayout extends React.Component {
                     ... ApplicantCardN
             */
             <div className="applicantsPage">
-                <div className="overlay" style={this.state.loading ? 
-                        {display: "block", opacity: 0.5} : 
-                        {display: "none", opacity: 0} }>
-                    {/* Loading element courtesy of: https://loading.io/css/ */}
-                    <div className="lds-ellipsis">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-                
+                <Overlay shown={this.state.pageLoading} />
                 <PageInformation applicantsStatistics={this.state.applicantsStatistics} />
                 <div className="toolbar" >
                     <SearchBox state={this.state} />

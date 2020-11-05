@@ -10,7 +10,7 @@ import * as API from "./mock_api";
 export function createState(inParentComponent: React.Component) {
 	return {
 		// Flag: Is the loading message visible?
-		loading: false,
+		pageLoading: false,
 
 		// List of applicants
 		applicants: [],
@@ -33,7 +33,7 @@ export function createState(inParentComponent: React.Component) {
 		 *  @param inVisible  True for shown, false for hidden
 		 */
 		showLoading: function (inVisible: boolean): void {
-			this.setState({ loading: inVisible });
+			this.setState({ pageLoading: inVisible });
 		}.bind(inParentComponent),
 
 		/**
