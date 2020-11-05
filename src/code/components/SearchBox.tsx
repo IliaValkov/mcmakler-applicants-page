@@ -7,6 +7,15 @@ type Props = {
     }
 }
 
+/**
+ * A Filter element skeleton. Please note this element doesn't
+ * function. Parameters are as defined by the Props type
+ * 
+ * @param state   The state object of the parent component
+ * @param state.searchQuery The field that holds the value of the input element
+ * @param state.handleChange User input handler function
+ */
+
 export const SearchBox: React.FC<Props> = ({state}) => {
     return(
         <span className="searchBox">

@@ -10,42 +10,30 @@ export interface IApplicant  {
     }
 }
 
-export interface IApplicantsStat {
-    name: string,
-    value: string,
+export interface IApplicantsStatistics {
+    total: string,
+    new: string,
+    viewed: string,
+    appointment: string,
+    other: string,
 }
 
-enum StatusType {
+export enum StatusType {
     Appointment_Set,
     Property_Viewed,
     Interested,
     Offer_Accepted
 }
 
-export const getStats: () => {applicantsStatistics: IApplicantsStat[]} = () =>{
+export const getStatistics: () => {data: IApplicantsStatistics} = () =>{
     return {
-        applicantsStatistics: [
-            {
-                name: "Total",
-                value: "4", 
-            },
-            {
-                name: "New",
-                value: "0", 
-            },
-            {
-                name: "Viewd",
-                value: "2", 
-            },
-            {
-                name: "Appointment",
-                value: "1", 
-            },
-            {
-                name: "Others",
-                value: "1", 
-            },
-        ]
+        data: {
+            total: "4",
+            new: "0",
+            viewed: "2",
+            appointment: "1",
+            other: "1",
+        }
     }
 }
 
@@ -59,7 +47,7 @@ export const getApplicants: () => { applicants: IApplicant[]} = () => {
             phoneNumber: "+49 146 344 23811",
             status: {
                 statusType: StatusType.Interested,
-                date: "11 June 19:00",
+                date: "",
                 bid: null,
                 }       
             },{

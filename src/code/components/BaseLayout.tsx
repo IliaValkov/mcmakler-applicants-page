@@ -1,28 +1,32 @@
 import "../../css/applicants-page.css";
+import "../../css/loading.css";
+
 import React from "react";
-import {createState} from "../state";
-import {PageInformation} from "./PageInformation";
-import { IApplicantsStat, IApplicant } from "../mock_api";
+import { createState } from "../state";
+import { PageInformation } from "./PageInformation";
 import { SearchBox } from "./SearchBox";
+import { Filter } from "./Filter";
+import { ApplicantList } from "./ApplicantList";
 
 
 export default class BaseLayout extends React.Component {
-    
+
     state = createState(this);
 
-    componentDidMount () {    
+    componentDidMount() {
         this.state.showLoading(true);
         // Simulate a delay while fetching data
-        setInterval(()=>{
+        setTimeout(() => {
             this.state.getApplicants();
             this.state.getStats();
             this.state.showLoading(false);
         }, 2000);
     }
-    
-    render(){
-        return(
-            /*
+
+    render() {
+
+        return (
+            /*  |____  Mock Structure  ____|
                 ApplicantsPage
                     Back Headline Statistics
                     Search BidsFilter Status
@@ -34,73 +38,27 @@ export default class BaseLayout extends React.Component {
                     ... ApplicantCardN
             */
             <div className="applicantsPage">
-                <PageInformation applicantsStatistics={this.state.applicantsStatistics}/>
-                <div className="toolbar" >
-                    <SearchBox state={this.state}/>
-                    <select className="filter" name="bidsFilter" id="bidsFilter">
-                        <option selected disabled value="None">Bids</option>
-                    </select>
-                    <select className="filter" name="statusFilter" id="statusFilter">
-                        <option selected disabled value="None">Status</option>
-                    </select>
-                </div>
-                <div className="applicantLists">
-                    <section>
-                        <h2>Appointment set (2)</h2>
-                        <ul>
-                            <li>
-                                <p className="initials">IV</p>
-                                <p className="fullName">Ilia Valkov</p>
-                                <p className="phoneNumber"> +49 146 344 23811</p>
-                                <p className="email">ilia@sample.com</p>
-                                <p className="statusAndDate">Appointment 22 July 19:00</p>
-                                <p className="bid">Bid 250 000 &euro;</p>
-                            </li>
-                            <li>
-                                <p className="initials">IV</p>
-                                <p className="fullName">Ilia Valkov</p>
-                                <p> +49 146 344 23811</p>
-                                <p>ilia@sample.com</p>
-                                <p className="statusAndDate">Appointment 22 July 19:00</p>
-                                <p className="bid">Bid 250 000 &euro;</p>
-                            </li>
-                        </ul>
-                    </section>
-                    <section>
-                        <h2>Interested (4)</h2>
-                        <ul>
-                            <li>
-                                <p className="initials">IV</p>
-                                <p className="fullName">Ilia Valkov</p>
-                                <p className="phoneNumber"> +49 146 344 23811</p>
-                                <p className="email">ilia@sample.com</p>
-                                <p className="statusAndDate">Interested</p>
-                            </li>
-                            <li>
-                                <p className="initials">IV</p>
-                                <p className="fullName">Ilia Valkov</p>
-                                <p> +49 146 344 23811</p>
-                                <p>ilia@sample.com</p>
-                                <p className="statusAndDate">Interested</p>
-                            </li>
-                            <li>
-                                <p className="initials">IV</p>
-                                <p className="fullName">Ilia Valkov</p>
-                                <p className="phoneNumber"> +49 146 344 23811</p>
-                                <p className="email">ilia@sample.com</p>
-                                <p className="statusAndDate">Interested</p>
-                            </li>
-                            <li>
-                                <p className="initials">IV</p>
-                                <p className="fullName">Ilia Valkov</p>
-                                <p> +49 146 344 23811</p>
-                                <p>ilia@sample.com</p>
-                                <p className="statusAndDate">Interested</p>
-                            </li>
-                        </ul>
-                    </section>
+                <div className="overlay" style={this.state.loading ? 
+                        {display: "block", opacity: 0.5} : 
+                        {display: "none", opacity: 0} }>
+                    {/* Loading element courtesy of: https://loading.io/css/ */}
+                    <div className="lds-ellipsis">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
                 
+                <PageInformation applicantsStatistics={this.state.applicantsStatistics} />
+                <div className="toolbar" >
+                    <SearchBox state={this.state} />
+                    <Filter name="bidsFilter" id="bidsFilter" label="Bids" options={[]} />
+                    <Filter name="statusFilter" id="statusFilter" label="Status" options={[]} />
+                </div>
+                <div className="applicantLists">
+                    <ApplicantList name={"All"} list={this.state.applicants} />
+                </div>
             </div>
         )
     }

@@ -1,11 +1,12 @@
 import React from "react";
-import { IApplicantsStat } from "../mock_api";
+import { IApplicantsStatistics } from "../mock_api";
 
 type Props = {
-    applicantsStatistics: IApplicantsStat[]
+    applicantsStatistics: IApplicantsStatistics
 }
 
 export const PageInformation: React.FC<Props> = ({applicantsStatistics} ) => {
+    
     return (
         <div className="information">
             <span>
@@ -14,13 +15,13 @@ export const PageInformation: React.FC<Props> = ({applicantsStatistics} ) => {
             </span>
             <h1>Applicants</h1>
             <div className="applicantsStats">
-            { applicantsStatistics.map( (stat: IApplicantsStat) => 
+            {/* Using the object keys to  */}
+            {Object.keys(applicantsStatistics).map(name => 
                 <span>
-                    <p>{stat.value}</p>    
-                    <p>{stat.name}</p>
-                </span>
-                )
-            }
+                    <p>{applicantsStatistics[name]}</p>
+                    <p>{name.slice(0,1).toUpperCase() + name.slice(1)}</p>
+                </span>    
+            )}
             </div>
         </div>   
     );
