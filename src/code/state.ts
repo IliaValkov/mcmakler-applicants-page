@@ -13,7 +13,10 @@ export function createState(inParentComponent: React.Component) {
 		pageLoading: false,
 
 		// List of applicants
-		applicants: [],
+		appointment: [],
+		viewed: [],
+		interested: [],
+		offerAccepted: [],
 
 		// List of applicants statistics
 		applicantsStatistics: {
@@ -39,11 +42,41 @@ export function createState(inParentComponent: React.Component) {
 		/**
 		 * Get applicants with mock API call
 		 */
-		getApplicants: function (): void {
-			const response = API.getApplicants();
-			this.setState({ applicants: response.applicants });
+		getApplicants: async function (): Promise<void> {
+			const allApplicants = API.getApplicants().applicants;
+			
+			const [appointment,viewed,interested,offerAccepted] = await Promise.all(
+				[this.state.filteredList(allApplicants,API.StatusType.Appointment_Set),
+				this.state.filteredList(allApplicants,API.StatusType.Property_Viewed),
+				this.state.filteredList(allApplicants,API.StatusType.Interested),
+				this.state.filteredList(allApplicants,API.StatusType.Offer_Accepted)]
+			);
+
+			this.setState({ 
+				appointment: appointment,
+				viewed: viewed,
+				interested: interested,
+				offerAccepted: offerAccepted, 
+			});
+
 		}.bind(inParentComponent),
 
+		filteredList: function (list: API.IApplicant[], filter: API.StatusType): Promise<API.IApplicant[]> {
+			return new Promise ((inResolve, inReject)=>{
+				try {
+					console.log(filter.valueOf());
+					if(list !== null) {
+						const result = list.filter( applicant => applicant.status.statusType === filter);
+						inResolve(result);
+					} else {
+						inResolve([]);
+					}
+				} catch (Error) {
+					inReject(Error);
+				}
+			})
+		}.bind(inParentComponent),
+		
 		/**
 		 * Get applicants stats with mock API call
 		 */

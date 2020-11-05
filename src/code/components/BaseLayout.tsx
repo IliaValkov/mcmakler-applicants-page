@@ -47,7 +47,10 @@ export default class BaseLayout extends React.Component {
                     <Filter name="statusFilter" id="statusFilter" label="Status" options={[]} />
                 </div>
                 <div className="applicantLists">
-                    <ApplicantList name={"All"} list={this.state.applicants} />
+                    <ApplicantList name={"Appointment"} list={this.state.appointment} />
+                    <ApplicantList name={"Viewed"} list={this.state.viewed} />
+                    <ApplicantList name={"Interested"} list={this.state.interested} />
+                    <ApplicantList name={"Offer Accepted"} list={this.state.offerAccepted} />
                 </div>
             </div>
         )
