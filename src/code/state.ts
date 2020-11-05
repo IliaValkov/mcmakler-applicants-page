@@ -6,6 +6,7 @@ export function createState (inParentComponent: React.Component) {
         loading: false,
         applicants: [],
         applicantsStatistics: <API.IApplicantsStat[]>[],
+        searchQuery: "",
         
         showLoading: function (inVisible: boolean): void {
             this.setState({ loading: inVisible });
@@ -19,6 +20,12 @@ export function createState (inParentComponent: React.Component) {
         getStats: function() {
             const response = API.getStats();
             this.setState({applicantsStatistics: response.applicantsStatistics});
+        }.bind(inParentComponent),
+
+        handleChange: function (event: React.ChangeEvent<HTMLInputElement>) {
+            this.setState({
+                [event.target.name] : event.target.value
+            });
         }.bind(inParentComponent),
     }
 }

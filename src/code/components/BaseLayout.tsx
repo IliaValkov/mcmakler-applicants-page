@@ -3,6 +3,7 @@ import React from "react";
 import {createState} from "../state";
 import {PageInformation} from "./PageInformation";
 import { IApplicantsStat, IApplicant } from "../mock_api";
+import { SearchBox } from "./SearchBox";
 
 
 export default class BaseLayout extends React.Component {
@@ -34,12 +35,8 @@ export default class BaseLayout extends React.Component {
             */
             <div className="applicantsPage">
                 <PageInformation applicantsStatistics={this.state.applicantsStatistics}/>
-                
                 <div className="toolbar" >
-                    <span className="searchBox">
-                        <img src="../src/media/icons/search.svg" alt="search-icon" width="18px" height="18px"/>
-                        <input type="text" className="search-box" placeholder="Search for applicant"/>
-                    </span>
+                    <SearchBox state={this.state}/>
                     <select className="filter" name="bidsFilter" id="bidsFilter">
                         <option selected disabled value="None">Bids</option>
                     </select>

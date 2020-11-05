@@ -5,7 +5,7 @@ type Props = {
     applicantsStatistics: IApplicantsStat[]
 }
 
-export const PageInformation: React.FC<Props> = ({ applicantsStatistics }) => {
+export const PageInformation: React.FC<Props> = ({applicantsStatistics} ) => {
     return (
         <div className="information">
             <span>
