@@ -5,6 +5,7 @@
 /* Information */
 .applicantsPage .information{
     margin-bottom: 24px;
+    height: 44px;
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-start;

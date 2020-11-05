@@ -1,13 +1,22 @@
 import "../../css/applicants-page.css";
 import React from "react";
 import {createState} from "../state";
+import {PageInformation} from "./PageInformation";
+import { IApplicantsStat, IApplicant } from "../mock_api";
+
 
 export default class BaseLayout extends React.Component {
     
     state = createState(this);
 
     componentDidMount () {    
-        this.state.getApplicants();
+        this.state.showLoading(true);
+        // Simulate a delay while fetching data
+        setInterval(()=>{
+            this.state.getApplicants();
+            this.state.getStats();
+            this.state.showLoading(false);
+        }, 2000);
     }
     
     render(){
@@ -24,34 +33,8 @@ export default class BaseLayout extends React.Component {
                     ... ApplicantCardN
             */
             <div className="applicantsPage">
-                <div className="information">
-                    <span>
-                        <img src="../src/media/icons/arrow-back.svg" alt="arrow-back-icon"/>
-                    </span>
-                    <h1>Applicants</h1>
-                    <div className="applicantsStats">
-                        <span>
-                            <p> 25</p>
-                            <p>Total</p>
-                        </span>
-                        <span>
-                            <p> 10</p>
-                            <p>New</p>
-                        </span>
-                        <span>
-                            <p> 5</p>
-                            <p>Viewed</p>
-                        </span>
-                        <span>
-                            <p> 3</p>
-                            <p>Appointment</p>
-                        </span>
-                        <span>
-                            <p> 6</p>
-                            <p>Others</p>
-                        </span>
-                    </div>
-                </div>
+                <PageInformation applicantsStatistics={this.state.applicantsStatistics}/>
+                
                 <div className="toolbar" >
                     <span className="searchBox">
                         <img src="../src/media/icons/search.svg" alt="search-icon" width="18px" height="18px"/>
@@ -120,6 +103,7 @@ export default class BaseLayout extends React.Component {
                         </ul>
                     </section>
                 </div>
+                
             </div>
         )
     }

@@ -10,11 +10,43 @@ export interface IApplicant  {
     }
 }
 
+export interface IApplicantsStat {
+    name: string,
+    value: string,
+}
+
 enum StatusType {
     Appointment_Set,
     Property_Viewed,
     Interested,
     Offer_Accepted
+}
+
+export const getStats: () => {applicantsStatistics: IApplicantsStat[]} = () =>{
+    return {
+        applicantsStatistics: [
+            {
+                name: "Total",
+                value: "4", 
+            },
+            {
+                name: "New",
+                value: "0", 
+            },
+            {
+                name: "Viewd",
+                value: "2", 
+            },
+            {
+                name: "Appointment",
+                value: "1", 
+            },
+            {
+                name: "Others",
+                value: "1", 
+            },
+        ]
+    }
 }
 
 export const getApplicants: () => { applicants: IApplicant[]} = () => {
