@@ -1,0 +1,235 @@
+.applicantsPage {
+    padding: 24px 16px;    
+}
+
+/* Information */
+.applicantsPage .information{
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.applicantsPage .information span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.applicantsPage .information h1 {
+    margin: 0 0 0 16px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.applicantsPage .information .applicantsStats{
+    display: none;
+}
+
+@media (min-width: 800px){
+    .applicantsPage{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .applicantsPage .information .applicantsStats{
+        flex-grow: 1;
+        display:flex;
+        justify-content: flex-end;
+    }
+    .applicantsPage .information .applicantsStats span {
+        width: 110px;
+    }
+    .applicantsPage .information .applicantsStats span:not(:first-child) {
+        border-left: 1px solid #e6e6e6;
+    }
+    .applicantsPage .information .applicantsStats span p {
+        margin: 0;
+        text-align: center;
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: 700;
+    }
+    .applicantsPage .information .applicantsStats span p:last-child {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+
+/* Toolbar */
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.searchBox{
+    flex-basis: 100%;
+    height: 45px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.filter, .searchBox {
+    height: 45px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+}
+
+.searchBox img{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 14px;
+    left: 13px;
+}
+
+.searchBox input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding-left: 42px;
+    font-size: 16px;
+    line-height: 19px;    
+}
+
+.searchBox input:focus, .filter:focus{
+    outline: none;
+}
+
+.searchBox input::-webkit-input-placeholder { /* Edge */
+    color: #9d9d9d;
+}
+
+.searchBox input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #9d9d9d;
+}
+
+.searchBox input::placeholder {
+    color: #9d9d9d;
+}
+
+.searchBox input::placeholder{
+    color: #9d9d9d;
+}
+
+.filter {
+    font-size: 14px;       
+    line-height: 20px;
+    color: #4a4a4a;
+    font-weight: 400;
+    padding: 12px 16px;
+} 
+
+.filter[name="bidsFilter"]{
+    margin-right: 8px;
+}
+
+@media (min-width: 800px) {
+    .toolbar{
+        flex-wrap: nowrap;
+    }
+    .searchBox{
+        flex-basis: 305px;
+        margin-right: 24px;
+    }
+}
+
+/* Applicant list */ 
+.applicantLists {
+    display: flex;
+    flex-direction: column;
+}
+
+.applicantLists section {
+    margin-bottom: 32px;
+}
+
+.applicantLists section h2{
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 24px;
+}
+
+.applicantLists section ul{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    white-space: nowrap;
+}
+/* The list items represent the Applicant Cards */
+.applicantLists section ul li{
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    min-width: 305px;
+    margin-right: 24px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 241px;
+}
+
+/* The paragraphs are the different data presented */
+.applicantLists section ul li p {
+    margin: 0;
+}
+
+/* The initials p will dynamically receive background and text color */
+.applicantLists section ul li p.initials{
+    width: 70px;
+    height: 70px;
+    margin-top: 16px;
+    border-radius: 50%;
+    background-color: grey;
+    padding-top: 23px;
+    text-align: center;
+}
+
+.applicantLists section ul li p.fullName{
+    margin-top: 8px;
+    font-weight: 700;
+}
+
+.applicantLists section ul li p.statusAndDate, .applicantLists section ul li p.bid{
+    margin-top: 8px;
+    padding: 0 8px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 18px;
+    color: #ffffff;
+    text-transform: uppercase;
+    background-color: #9d9d9d;
+    border-radius: 4px;
+}
+
+.applicantLists section ul li p.bid {
+    background-color: #feb902;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 800px) {
+    .applicantLists {
+        overflow: auto;
+    }
+    .applicantLists section ul {
+        flex-wrap: wrap;
+        overflow: initial;
+    }
+    .applicantLists section ul li{
+        margin-bottom: 24px;
+    }
+}
