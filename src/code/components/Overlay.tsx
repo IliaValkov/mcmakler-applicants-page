@@ -4,6 +4,13 @@ type Props = {
     shown: boolean;
 }
 
+/**
+ * An overlay for a loading animation
+ * 
+ * @param shown A boolean determining if the overlay is to be rendered 
+ * 
+ */
+
 export const Overlay: React.FC<Props> = ({shown}) => {
     return(
         <div className="overlay" style={shown ? 

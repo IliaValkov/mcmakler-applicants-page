@@ -1,15 +1,24 @@
+// Stylesheets imports
 import "../../css/applicants-page.css";
 import "../../css/loading.css";
 
+// React imports
 import React from "react";
+
+// Application state import
 import { createState } from "../state";
+
+// Component imports
 import { PageInformation } from "./PageInformation";
 import { SearchBox } from "./SearchBox";
 import { Filter } from "./Filter";
 import { ApplicantList } from "./ApplicantList";
 import { Overlay } from "./Overlay";
 
-
+/**
+ * The top most component of the React app
+ * 
+ */
 export default class BaseLayout extends React.Component {
 
     state = createState(this);
