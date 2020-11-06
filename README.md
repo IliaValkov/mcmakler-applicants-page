@@ -36,7 +36,7 @@ The document consists of the following chapters:
 1. Software requirements
 1. Design and trade-offs
     1. Git branching model
-1. Setting up the project
+   
 ### Stakeholder needs 
 
 #### Use case
