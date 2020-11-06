@@ -14,10 +14,8 @@ type Props = {
  * @param list The list of IApplicant objects
  */
 export const ApplicantList: React.FC<Props> = ({ name, list }) => {
-
     
-
-    return (
+    return ( list.length > 0 ?
         <section>
             <h2>{`${name} (${list.length})`}</h2>
             <ul>
@@ -26,6 +24,7 @@ export const ApplicantList: React.FC<Props> = ({ name, list }) => {
                         applicant={applicant} />)
                 }
             </ul>
-        </section>
+        </section> :
+        null
     )
 } 

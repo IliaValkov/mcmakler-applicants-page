@@ -21,10 +21,25 @@ export default class BaseLayout extends React.Component {
             this.state.getApplicants();
             this.state.getStats();
             this.state.showLoading(false);
+            
+            // Get the search param from the URL
+            const searchParams = new URL(window.location.href).searchParams;
+            const sq = searchParams.get("search");
+            
+            // set searchQuery and perform search
+            if(sq !== null) {
+                this.setState({
+                    searchQuery: sq
+                }, () => this.state.handleSearch(null));
+            }
+            
         }, 2000);
+
     }
 
     render() {
+
+        const listNames = ["Appointment", "Viewed", "Interested", "Offer Accepted"];
 
         return (
             /*  |____  Mock Structure  ____|
@@ -42,15 +57,14 @@ export default class BaseLayout extends React.Component {
                 <Overlay shown={this.state.pageLoading} />
                 <PageInformation applicantsStatistics={this.state.applicantsStatistics} />
                 <div className="toolbar" >
-                    <SearchBox state={this.state} />
+                    <SearchBox searchQuery={this.state.searchQuery} handleChange={this.state.handleChange} onSubmit={this.state.handleSearch}/>
                     <Filter name="bidsFilter" id="bidsFilter" label="Bids" options={[]} />
                     <Filter name="statusFilter" id="statusFilter" label="Status" options={[]} />
                 </div>
                 <div className="applicantLists">
-                    <ApplicantList name={"Appointment"} list={this.state.appointment} />
-                    <ApplicantList name={"Viewed"} list={this.state.viewed} />
-                    <ApplicantList name={"Interested"} list={this.state.interested} />
-                    <ApplicantList name={"Offer Accepted"} list={this.state.offerAccepted} />
+                    {this.state.searchView ?
+                    Object.values(this.state.search).map( (list, index) => <ApplicantList name={listNames[index]} list={list} />) :
+                    Object.values(this.state.all).map( (list, index) => <ApplicantList name={listNames[index]} list={list} />)}
                 </div>
             </div>
         )
