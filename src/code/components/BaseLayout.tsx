@@ -95,6 +95,7 @@ export default class BaseLayout extends React.Component {
 
                 <div className="applicantLists">
                     <Overlay shown={this.state.errorWhileFetchingData}>
+                        <div className="error">Attention this is a DEMO error. Data will load in a couple of seconds</div>
                         <div className="error">There was an error while loading applicants data</div>
                     </Overlay>
                     {this.state.searchView ? // If the user has searched 
