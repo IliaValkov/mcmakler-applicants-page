@@ -15,6 +15,7 @@ import { Filter } from "./Filter";
 import { ApplicantList } from "./ApplicantList";
 import { Overlay } from "./Overlay";
 
+
 /**
  * The top most component of the React app
  * 

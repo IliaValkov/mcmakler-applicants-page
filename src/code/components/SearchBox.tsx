@@ -1,4 +1,5 @@
 import React from "react";
+import searchIcon from "../../media/img/search.png";
 
 type Props = {
     searchQuery: string;
@@ -18,7 +19,7 @@ type Props = {
 export const SearchBox: React.FC<Props> = ({searchQuery, handleChange, onSubmit}) => {
     return(
         <form className="searchBox" onSubmit={onSubmit}>
-            <img src="../../media/icons/search.svg" 
+            <img src={searchIcon} 
                 alt="search-icon" 
                 width="18px" 
                 height="18px"/>
