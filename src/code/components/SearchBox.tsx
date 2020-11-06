@@ -18,7 +18,7 @@ type Props = {
 export const SearchBox: React.FC<Props> = ({searchQuery, handleChange, onSubmit}) => {
     return(
         <form className="searchBox" onSubmit={onSubmit}>
-            <img src="../src/media/icons/search.svg" 
+            <img src="../../media/icons/search.svg" 
                 alt="search-icon" 
                 width="18px" 
                 height="18px"/>

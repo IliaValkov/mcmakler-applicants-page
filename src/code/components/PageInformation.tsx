@@ -17,7 +17,7 @@ export const PageInformation: React.FC<Props> = ({applicantsStatistics} ) => {
         <div className="information">
             <span>
                 {/* The specified relative path should be thought to begin from the dist folder */}
-                <img src="../src/media/icons/arrow-back.svg" alt="arrow-back-icon"/>
+                <img src="../../media/icons/arrow-back.svg" alt="arrow-back-icon"/>
             </span>
             <h1>Applicants</h1>
             <div className="applicantsStats">
