@@ -6,7 +6,8 @@ If your clone this repository, all you need to do afterwards is execute
 
 # Reviewing the project
 
-The project is currently deployed on Heroku and can be accessed by the followin link.
+The project is currently deployed on Heroku and can be accessed by the followin link:
+
 [https://applicant-page.herokuapp.com/](https://applicant-page.herokuapp.com/)
 
 # McMakler Applicants Page Project Manual
