@@ -98,6 +98,7 @@ From them have been extraxted the following software requirements:
 
 Source folder structure rundown: 
 
+```
 src/
 
     code/
@@ -117,6 +118,7 @@ src/
     media/
 
     index.html
+```
 
 Worth explaining is the state.ts file. It exports a function that returns the applications state object, containing all fields and manipulation methods.
 This enables the passing of state to the topmost component of the Application, which in turn passes the needed information to its children components.
