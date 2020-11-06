@@ -10,9 +10,9 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.(png|svg|jpg)$/,
-				use: { loader: "url-loader", options: { limit: 65536, esModule: false } },
-			},
+				test: /\.(png|svg)$/,
+				use : { loader : "url-loader", options : { limit : 65536, esModule : false, } }
+			  },
 			{
 				test: /\.html$/,
 				use: { loader: "html-loader" },
@@ -31,6 +31,6 @@ module.exports = {
 	plugins: [new HtmlWebPackPlugin({ template: "./src/index.html", filename: "./index.html" })],
 
 	performance: { hints: false },
-	watch: true,
+	watch: false,
 	devtool: "source-map",
 };
