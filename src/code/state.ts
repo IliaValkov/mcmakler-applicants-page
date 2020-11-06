@@ -197,8 +197,7 @@ export function createState(inParentComponent: React.Component) {
 					let foundResults = Object.values(this.state.search).some(list => {
 						const l = list as API.IApplicant[];
 						return l.length !== 0;
-					})
-					console.log("foundResults: "+ foundResults)
+					});
 					this.setState({
 						foundResults: foundResults
 					})
