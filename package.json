@@ -1,10 +1,13 @@
 {
   "name": "applicants",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Page for visualizing applicants information to a users property",
+  "private" : "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "npx webpack --watch",
+    "compile" : "npx webpack",
+    "build": "npm install && npm run compile"
   },
   "keywords": [],
   "author": "",
