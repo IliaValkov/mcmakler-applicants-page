@@ -85,7 +85,7 @@ For the task at hand, the following tools are to be used:
 - webpack 
 
 ### Software requirements
-The stakeholder specified the followinf requirements:
+The stakeholder specified the following requirements:
 
 <img src="./doc-img/../doc-img/StakeHolderReqs-1.png" alt="Branching Model" style="width:800px" />
 
@@ -97,15 +97,25 @@ From them have been extraxted the following software requirements:
 ### Design and trade-offs
 
 Source folder structure rundown: 
+
 src/
+
     code/
+
         /components
+
         d.ts
+
         main.tsx
+
         mock_api.ts
+
         state.ts
+
     css/
+
     media/
+
     index.html
 
 Worth explaining is the state.ts file. It exports a function that returns the applications state object, containing all fields and manipulation methods.
