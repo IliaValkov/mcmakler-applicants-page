@@ -15,6 +15,7 @@ export function createState(inParentComponent: React.Component) {
 		// Is the page showing search results?
 		searchView: false,
 
+		// An object with lists containing all applicants
 		all: {
 			// List of applicants that have an appointment
 			appointment: [],
@@ -29,6 +30,7 @@ export function createState(inParentComponent: React.Component) {
 			offerAccepted: [],
 		},
 
+		// An object with lists containing all search results
 		search: {
 			// List of applicants that have an appointment
 			appointment: [],
@@ -67,7 +69,9 @@ export function createState(inParentComponent: React.Component) {
 		/**
 		 * Get applicants with mock API call
 		 * This function utilize the filteredList Promise and concurently filters the 
-		 * recieved applicant list for each status type.
+		 * recieved applicant list for each status type. This function calls handleSearch
+		 * upon updating the applicants list, in order to filter them according to the 
+		 * search query, in the case of one received from the page url.
 		 */
 		getApplicants: async function (): Promise<void> {
 			const allApplicants = API.getApplicants().applicants;
@@ -139,7 +143,16 @@ export function createState(inParentComponent: React.Component) {
 			
 		}.bind(inParentComponent),
 
-    	handleSearch: async function (event: React.FormEvent<HTMLFormElement> | null) {
+		/**
+		 * Perform concurent search on all applicant list based on applicants first
+		 * name, last name and email. Updates the url according to the given search 
+		 * query
+		 * 
+		 * @param event Either a React event object holding information about the
+		 * SearchBox input value or null for performing a search on page load if 
+		 * the page url has a search parameter specified
+		 */
+		handleSearch: async function (event: React.FormEvent<HTMLFormElement> | null) {
 			if(event) event.preventDefault();
    
 			if(this.state.searchQuery !== "") {
@@ -149,7 +162,7 @@ export function createState(inParentComponent: React.Component) {
 					this.state.searchListForApplicant(this.state.all.interested),
 					this.state.searchListForApplicant(this.state.all.offerAccepted)]
 				);
-				console.log(appointment);
+				
 				this.setState({ 
 					searchView: true,
 					search: {
@@ -164,13 +177,21 @@ export function createState(inParentComponent: React.Component) {
 			}
 		}.bind(inParentComponent),
 
+		/**
+		 * Searches a given list based on the searchQuery field
+		 * 
+		 * @param list The list to be searched
+		 * @returns Promise<IApplicant[]> A promise object that resolves in a
+		 * list of IApplicant objects.   
+		 */
 		searchListForApplicant: function(list: API.IApplicant[]): Promise<API.IApplicant[]> {
 			return new Promise((inResolve, inReject)=>{
 				try {
 					const sq = <string> this.state.searchQuery.toLowerCase();
 					const result = list.filter( applicant => {
 							const fullName = applicant.firstName + applicant.lastName;
-								// remove the white space from the search Query to match both first and last name
+								// remove the white space from the search Query to match
+								//  both first and last name if both given by the user
 								return fullName.toLowerCase().includes(sq.split(/\s/).join("")) ||
 								applicant.email.toLowerCase().includes(sq); 
 							});
@@ -185,6 +206,11 @@ export function createState(inParentComponent: React.Component) {
 			});
 		}.bind(inParentComponent),
 
+
+		/**
+		 * CLears the result arrays
+		 * 
+		 */
 		clearSearchResults: function () {
 			this.state.deleteSearchParam();
 			this.setState({ 
@@ -198,12 +224,21 @@ export function createState(inParentComponent: React.Component) {
 			});
 		}.bind(inParentComponent),
 
+		/**
+		 * Updates the search parameter of the page url 
+		 * 
+		 */
 		updateURLSearchParam: function () {
 			const searchParam = new URLSearchParams(window.location.search);
 			searchParam.set("search", this.state.searchQuery.toLowerCase());
 			window.history.pushState(null,"", `?${searchParam.toString()}` );
 		}.bind(inParentComponent),
 
+
+		/**
+		 * Removes the search parameter from the page url
+		 * 
+		 */
 		deleteSearchParam: function () {
 			const currentURL = new URL(window.location.href);
 			currentURL.searchParams.delete("search")

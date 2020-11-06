@@ -15,24 +15,20 @@ export default class BaseLayout extends React.Component {
     state = createState(this);
 
     componentDidMount() {
-        this.state.showLoading(true);
+        // Get the search param from the URL
+        const searchParams = new URL(window.location.href).searchParams;
+        const sq = searchParams.get("search");
+        this.setState({
+            searchQuery: sq
+        });
+        
         // Simulate a delay while fetching data
+        this.state.showLoading(true);
         setTimeout(() => {
+            // set searchQuery and perform search
             this.state.getApplicants();
             this.state.getStats();
             this.state.showLoading(false);
-            
-            // Get the search param from the URL
-            const searchParams = new URL(window.location.href).searchParams;
-            const sq = searchParams.get("search");
-            
-            // set searchQuery and perform search
-            if(sq !== null) {
-                this.setState({
-                    searchQuery: sq
-                }, () => this.state.handleSearch(null));
-            }
-            
         }, 2000);
 
     }
@@ -42,17 +38,6 @@ export default class BaseLayout extends React.Component {
         const listNames = ["Appointment", "Viewed", "Interested", "Offer Accepted"];
 
         return (
-            /*  |____  Mock Structure  ____|
-                ApplicantsPage
-                    Back Headline Statistics
-                    Search BidsFilter Status
-                    ApplicantList1
-                        ApplicantCard1 ApplicantCard2 ...
-                    ... ApplicantCardN
-                    ApplicantList2
-                        ApplicantCard1 ApplicantCard2 ...
-                    ... ApplicantCardN
-            */
             <div className="applicantsPage">
                 <Overlay shown={this.state.pageLoading} />
                 <PageInformation applicantsStatistics={this.state.applicantsStatistics} />
