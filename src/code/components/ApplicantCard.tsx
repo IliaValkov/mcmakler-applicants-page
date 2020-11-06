@@ -61,7 +61,7 @@ export const ApplicantCard: React.FC<Props> = ({ applicant}) => {
     }
 
     return (
-        <li>
+        <li key={applicant.phoneNumber}>
             <p 
                 className="initials" 
                 style={initialsStyle}>

@@ -16,13 +16,12 @@ type Props = {
 export const ApplicantList: React.FC<Props> = ({ name, list }) => {
     
     return ( list.length > 0 ?
-        <section>
+        <section key={name}>
             <h2>{`${name} (${list.length})`}</h2>
             <ul>
                 {list.map(applicant =>
                     <ApplicantCard
-                        applicant={applicant} />)
-                }
+                        applicant={applicant} />)}
             </ul>
         </section> :
         null

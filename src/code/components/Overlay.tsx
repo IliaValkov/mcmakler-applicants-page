@@ -2,6 +2,7 @@ import React from "react";
 
 type Props = {
     shown: boolean;
+    children: React.ReactNode;
 }
 
 /**
@@ -11,18 +12,12 @@ type Props = {
  * 
  */
 
-export const Overlay: React.FC<Props> = ({shown}) => {
+export const Overlay: React.FC<Props> = ({shown, children}) => {
     return(
         <div className="overlay" style={shown ? 
                 {display: "block", opacity: 0.5} : 
                 {display: "none", opacity: 0} }>
-            {/* Loading element courtesy of: https://loading.io/css/ */}
-            <div className="lds-ellipsis">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+            {children}  
         </div>
     )
 }

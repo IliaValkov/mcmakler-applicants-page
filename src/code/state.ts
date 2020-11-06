@@ -15,6 +15,12 @@ export function createState(inParentComponent: React.Component) {
 		// Is the page showing search results?
 		searchView: false,
 
+		// Has the page encountered an error?
+		errorWhileFetchingData: false,
+
+		// Did the search find a match?
+		foundResults: false,
+
 		// An object with lists containing all applicants
 		all: {
 			// List of applicants that have an appointment
@@ -58,12 +64,25 @@ export function createState(inParentComponent: React.Component) {
 		searchQuery: <string>"",
 
 		/**
-		 * Shows or hides loading message
+		 * Shows or hides an Overlay based on a boolean.
+		 *
+		 *  @param inVisible  True for shown, false for hidden
+		 * 	@param name The name of the boolean field that determines if 
+		 * the overlay is shown
+		 */
+		showOverlay: function (inVisible: boolean, name: string): void {
+			this.setState({ [name]: inVisible });
+		}.bind(inParentComponent),
+
+		/**
+		 * Shows or hides error message based on a boolean.
 		 *
 		 *  @param inVisible  True for shown, false for hidden
 		 */
-		showLoading: function (inVisible: boolean): void {
-			this.setState({ pageLoading: inVisible });
+		showErrorMessage: function (inVisible: boolean) {
+			this.setState({
+				errorWhileFetchingData: inVisible
+			});
 		}.bind(inParentComponent),
 
 		/**
@@ -171,6 +190,18 @@ export function createState(inParentComponent: React.Component) {
 						interested: interested,
 						offerAccepted: offerAccepted, 
 					}
+				}, () => {
+					// After the search lists have been updated check results have been found
+					// In the case of no results, set foundResults to false. This signalize React 
+					// to render a "No results found" messege.
+					let foundResults = Object.values(this.state.search).some(list => {
+						const l = list as API.IApplicant[];
+						return l.length !== 0;
+					})
+					console.log("foundResults: "+ foundResults)
+					this.setState({
+						foundResults: foundResults
+					})
 				});
 	
 				this.state.updateURLSearchParam();
@@ -189,16 +220,16 @@ export function createState(inParentComponent: React.Component) {
 				try {
 					const sq = <string> this.state.searchQuery.toLowerCase();
 					const result = list.filter( applicant => {
-							const fullName = applicant.firstName + applicant.lastName;
-								// remove the white space from the search Query to match
-								//  both first and last name if both given by the user
-								return fullName.toLowerCase().includes(sq.split(/\s/).join("")) ||
-								applicant.email.toLowerCase().includes(sq); 
-							});
-							if(result.length === 0 ) {
-								inResolve([]);
-							}
-							inResolve(result);
+					const fullName = applicant.firstName + applicant.lastName;
+						// Remove the white space from the search Query to match
+						// both first and last name if both given by the user
+						return fullName.toLowerCase().includes(sq.split(/\s/).join("")) ||
+						applicant.email.toLowerCase().includes(sq); 
+					});
+					if(result.length === 0 ) {
+						inResolve([]);
+					}
+					inResolve(result);
 					
 				} catch (Error) {
 					inReject(Error);
@@ -215,6 +246,7 @@ export function createState(inParentComponent: React.Component) {
 			this.state.deleteSearchParam();
 			this.setState({ 
 				searchView: false,
+				hasResults: false,
 				search: {
 					appointment: [],
 					viewed: [],

@@ -154,6 +154,17 @@
 	min-height: 150px;
 	display: flex;
 	flex-direction: column;
+	position: relative;
+}
+
+.applicantLists .overlay .error{
+	text-align: center;
+	color: #b00020;
+}
+
+.applicantLists .overlay .noResults{
+	text-align: center;
+	color: inherit;
 }
 
 .applicantLists section {
@@ -244,5 +255,14 @@
 
 	.applicantLists section ul li {
 		margin-bottom: 24px;
+	}
+
+	.applicantLists .overlay{
+		background-color: transparent;
+		/* Positions declared again, to prevent the overlay from overflowing the applicantsList */
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
 	}
 }
