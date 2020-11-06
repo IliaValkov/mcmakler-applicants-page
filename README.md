@@ -1,4 +1,16 @@
+# Cloning the project
+
+If your clone this repository, all you need to do afterwards is execute
+
+`npm run build`
+
+# Reviewing the project
+
+The project is currently deployed on Heroku and can be accessed by the followin link.
+[https://applicant-page.herokuapp.com/](https://applicant-page.herokuapp.com/)
+
 # McMakler Applicants Page Project Manual
+
 
 ## Introduction and Purpose
 
@@ -23,8 +35,7 @@ The document consists of the following chapters:
 1. Software requirements
 1. Design and trade-offs
     1. Git branching model
-1. Implementation
-
+1. Setting up the project
 ### Stakeholder needs 
 
 #### Use case
@@ -73,11 +84,37 @@ For the task at hand, the following tools are to be used:
 - webpack 
 
 ### Software requirements
+The stakeholder specified the followinf requirements:
+
+<img src="./doc-img/../doc-img/StakeHolderReqs-1.png" alt="Branching Model" style="width:800px" />
+
+From them have been extraxted the following software requirements:
+
+<img src="./doc-img/../doc-img/Reqs-1.png" alt="Branching Model" style="width:1000px" />
+
 
 ### Design and trade-offs
 
+Source folder structure rundown: 
+src/
+    code/
+        /components
+        d.ts
+        main.tsx
+        mock_api.ts
+        state.ts
+    css/
+    media/
+    index.html
+
+Worth explaining is the state.ts file. It exports a function that returns the applications state object, containing all fields and manipulation methods.
+This enables the passing of state to the topmost component of the Application, which in turn passes the needed information to its children components.
+This is done in order to abstract the application logic from its' components. This approach is showcased in "Modern Full-Stack Development" by Frank Zammetti (Apress, 2020).
+
+
 #### Git branching model
 ---
+
 
 This project adopts a simplified version of the
 “Gitflow” workflow, without using “hotfix” and “release” branches.
@@ -94,7 +131,6 @@ To differentiate different branches, a slash ("/") character is put between the
 category and the branch name (example: doc/project-manual).
 The persistent branches used in the workflow are depicted in the image below.
 
-<img src="./doc-img/../doc-img/branching-model-inkscape.png" alt="Branching Model" style="width:800px" />
 
 - The "master" branch holds release versions.
 - The "development" branch serves as the main working branch.
@@ -103,4 +139,4 @@ The persistent branches used in the workflow are depicted in the image below.
 They are created from the "development" branch, and used to facilitate the
 development of a particular topic in the source code.
 
-### Implementation
+<img src="./doc-img/../doc-img/branching-model-inkscape.png" alt="Branching Model" style="width:800px" />
